@@ -7,19 +7,12 @@ import SearchOutlinedIcon from "@material-ui/icons/SearchOutlined";
 import { Avatar, IconButton } from "@material-ui/core";
 import SidebarChat from "./SidebarChat";
 import { useStateValue } from "../contexts/StateProvider";
-import axios from "../db/axios";
+
 function Sidebar() {
-  const [{ user, rooms }, dispatch] = useStateValue();
+  const [{ user, rooms }] = useStateValue();
+
   console.log(user);
 
-  const newChat = () => {
-    const room = prompt("Please, introduce the name of The new Room");
-
-    axios.post("/rooms/new", {
-      name: room,
-      users: [user.displayName],
-    });
-  };
   return (
     <div className="sidebar">
       <div className="sidebar__header">
@@ -42,12 +35,12 @@ function Sidebar() {
           <input placeholder="Search or start a new chat" type="text" />
         </div>
       </div>
-      <div onClick={newChat} className="sidebar__newChat">
-        <h1>Add new Room</h1>
-      </div>
+      <p> To create a chat, send an invitation to users at the right!</p>
       <div className="sidebar__chats">
         {rooms?.map(({ name, users }) => (
-          <SidebarChat title={name} />
+          <>
+            <SidebarChat title={name} users={users} />
+          </>
         ))}
       </div>
     </div>

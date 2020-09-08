@@ -3,6 +3,7 @@ export const initialState = {
   rooms: [],
   detailRoom: null,
   messages: [],
+  allUsers: [],
 };
 
 export const actionTypes = {
@@ -12,6 +13,7 @@ export const actionTypes = {
   SET_DETAIL_ROOM: "SET_DETAIL_ROOM",
   SET_ROOM_MESSAGES: "SET_ROOM_MESSAGES",
   SET_MESSAGES_PUSHER: "SET_MESSAGES_PUSHER",
+  SET_ALL_USERS: "SET_ALL_USERS",
 };
 
 const reducer = (state, action) => {
@@ -50,6 +52,12 @@ const reducer = (state, action) => {
       return {
         ...state,
         messages: [...state.messages, action.message],
+      };
+
+    case actionTypes.SET_ALL_USERS:
+      return {
+        ...state,
+        allUsers: action.users,
       };
 
     default:

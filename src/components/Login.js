@@ -10,7 +10,7 @@ function Login() {
     auth
       .signInWithPopup(provider)
       .then((result) => {
-        console.log(result.user);
+        console.log(result);
         axios
           .post("/users/new", {
             name: result.user.displayName,

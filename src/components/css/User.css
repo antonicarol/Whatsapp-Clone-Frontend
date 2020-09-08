@@ -1,0 +1,12 @@
+.user {
+  display: flex;
+  padding: 10px;
+}
+
+.user > h4 {
+  margin-left: 10px;
+}
+
+.user:hover {
+  background-color: #fafafa;
+}

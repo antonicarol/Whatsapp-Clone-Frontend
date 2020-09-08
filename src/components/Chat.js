@@ -14,6 +14,10 @@ function Chat() {
   const [input, setInput] = useState("");
   const [{ user, detailRoom, messages }, dispatch] = useStateValue();
 
+  const userNotLogged = detailRoom?.users.find(
+    (u) => u.user !== user.displayName
+  );
+
   const sendMessage = (e) => {
     e.preventDefault();
 
@@ -21,7 +25,7 @@ function Chat() {
       roomId: detailRoom._id,
       name: user.displayName,
       message: input,
-      timeStamp: "Just now",
+      timeStamp: Date.now(),
       recieved: false,
     });
     setInput("");
@@ -35,7 +39,7 @@ function Chat() {
         messages: response.data,
       });
     });
-  }, [detailRoom]);
+  }, [detailRoom, dispatch]);
 
   //GETTING DATA CHANGES FROM THE DB
   useEffect(() => {
@@ -54,12 +58,12 @@ function Chat() {
       channel.unbind_all();
       channel.unsubscribe();
     };
-  }, [messages]);
+  }, [messages, dispatch]);
 
   return (
     <div className="chat">
       <div className="chat__header">
-        <Avatar />
+        <Avatar src={userNotLogged?.photo} />
         <div className="chat__headerInfo">
           <h3> {detailRoom?.name} </h3>
           <p>Last seen at ...</p>
