@@ -1,0 +1,17 @@
+.login {
+  display: grid;
+  place-items: center;
+}
+
+.login > img {
+  object-fit: contain;
+  width: 70vw;
+}
+
+.login > button {
+  font-size: x-large;
+  background-color: #25d366;
+  border: none;
+  padding: 20px;
+  margin-top: -20px;
+}
